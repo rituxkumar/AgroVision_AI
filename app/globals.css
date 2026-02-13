@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 /* Disable system-based dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -7,5 +8,57 @@
   }
 }
 
-/* Enable class-based dark mode manually */
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Hide scrollbar but keep scrolling */
+.chat-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-text {
+  background: linear-gradient(
+    270deg,
+    #22c55e,
+    #16a34a,
+    #06b6d4,
+    #3b82f6,
+    #9333ea,
+    #ec4899,
+    #f97316,
+    #22c55e
+  );
+background-size: 600% 600%;
+
+background-clip: text;            /* standard */
+-webkit-background-clip: text;    /* Safari/Chrome */
+
+-webkit-text-fill-color: transparent;
+
+animation: gradientText 6s ease infinite;
+
+}
+
+
+@keyframes aiColorFlow {
+  0%   { color: #22d3ee; }  /* sky */
+  25%  { color: #60a5fa; }  /* blue */
+  50%  { color: #a78bfa; }  /* purple */
+  75%  { color: #f472b6; }  /* pink */
+  100% { color: #22d3ee; }  /* back */
+}
+
+.ai-animated {
+  animation: aiColorFlow 5s linear infinite;
+  text-shadow: 0 0 8px currentColor;
+}

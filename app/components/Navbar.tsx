@@ -60,11 +60,11 @@ export default function Navbar() {
         {/* Mobile */}
         <div className="md:hidden flex items-center gap-3">
           <button onClick={toggleTheme}>
-            {dark ? <Sun size={20} /> : <Moon size={20} />}
+            {dark ? <Sun className="text-white" size={20} /> : <Moon size={20} />}
           </button>
 
           <button onClick={() => setOpen(!open)}>
-            {open ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X className=" text-black" size={24} /> : <Menu className="text-black dark:text-white" size={24} />}
           </button>
         </div>
       </div>
