@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Sun, Moon, Leaf, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function Navbar() {
   const [dark, setDark] = useState(false);
@@ -40,7 +41,13 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6 text-green-700 dark:text-green-300">
+          <div className="flex  gap-5 font-bold">
+            <Link href={'/'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Explore</p></Link>
 
+            <Link href={'/'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Contact</p></Link>
+            <Link href={'/'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">About</p></Link>
+            <Link href={'/'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Login</p></Link>
+          </div>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full bg-green-100 dark:bg-green-800 hover:scale-110 transition"
