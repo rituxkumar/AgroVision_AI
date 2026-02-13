@@ -1,0 +1,245 @@
+# 🌱 AgroVision AI – Team Project Overview
+
+## 📌 Project Title
+
+**AgroVision AI – AI Based Crop Disease Detection System (Web + Mobile)**
+
+## 🎯 Project Objective
+
+To develop an AI powered platform that helps farmers detect crop diseases using leaf images and provides proper treatment suggestions through:
+
+* Web Application (React)
+* Mobile App (React Native)
+* AI Backend (Flask + TensorFlow)
+* Database (MongoDB)
+
+---
+
+## 🚨 Problem Statement
+
+Farmers face these issues:
+
+* Unable to identify disease at early stage
+* Wrong pesticide usage
+* Lack of expert availability
+* No proper digital guidance
+
+Our system will solve this using Image Processing & Machine Learning.
+
+---
+
+## 🧠 Core Features
+
+1. Image based disease detection
+2. Confidence score generation
+3. Treatment recommendation
+4. Scan history
+5. AI chatbot support
+6. Web + Mobile support
+7. MongoDB data storage
+
+---
+
+## 🧩 Technology Stack
+
+### Frontend Web
+
+* React.js
+* Tailwind CSS
+* Axios
+
+### Mobile App
+
+* React Native
+* Expo / CLI
+* Camera module
+
+### Backend
+
+* Python Flask
+* TensorFlow CNN
+* REST API
+
+### Database
+
+* MongoDB
+
+---
+
+## 👥 TEAM ROLES & TASK ASSIGNMENT
+
+### 1. Frontend Web Team
+
+**Responsible: UI Team**
+
+Tasks:
+
+* Landing Page UI
+* Image Upload Page
+* Result Page
+* API Integration
+* Dashboard
+* Responsive Design
+
+Output:
+
+* Working React Web App
+
+---
+
+### 2. Mobile Team (React Native)
+
+Tasks:
+
+* App UI screens
+* Camera integration
+* API connection
+* Result display
+* History module
+
+Output:
+
+* Android App APK
+
+---
+
+### 3. Backend Team
+
+Tasks:
+
+* Flask server
+* API development
+* MongoDB connection
+* Authentication
+* History storage
+
+Output:
+
+* Running backend APIs
+
+---
+
+### 4. AI/ML Team
+
+Tasks:
+
+* Dataset collection
+* Image preprocessing
+* CNN model training
+* Accuracy testing
+* Model integration
+
+Output:
+
+* Trained model (.h5)
+
+---
+
+### 5. Documentation Team
+
+Tasks:
+
+* Project report
+* PPT
+* DFD & Flowchart
+* Viva preparation
+
+---
+
+## 📅 WEEK WISE PLAN
+
+### Week 1 – Planning
+
+* Topic finalization
+* Requirement analysis
+* Work distribution
+
+### Week 2 – Design
+
+* UI wireframe
+* Architecture
+* Database schema
+
+### Week 3 – ML Work
+
+* Dataset
+* Training
+* Testing
+
+### Week 4 – Backend
+
+* Flask APIs
+* MongoDB
+
+### Week 5 – Web
+
+* React UI
+* Integration
+
+### Week 6 – Mobile
+
+* React Native app
+
+### Week 7 – Testing
+
+* Bug fixing
+
+### Week 8 – Final
+
+* PPT
+* Report
+* Demo
+
+---
+
+## 📁 Project Structure
+
+AgroVision-AI/
+├── backend/
+├── web/
+├── mobile/
+├── model/
+└── docs/
+
+---
+
+## 📊 Expected Output
+
+* Disease Name
+* Confidence %
+* Treatment Steps
+* Stored History
+
+---
+
+## 🔮 Future Scope
+
+* More crops
+* Voice assistant
+* Soil analysis
+* Offline mode
+
+---
+
+## ✅ Success Criteria
+
+* Model accuracy > 85%
+* Web working
+* App working
+* Data stored in MongoDB
+
+---
+
+## 📞 Team Coordination Rules
+
+* Daily update in group
+* GitHub commits
+* Weekly review
+* Module wise testing
+
+---
+
+**Project Guide:**
+**Team Members:**
+**College:**
+**Session:**

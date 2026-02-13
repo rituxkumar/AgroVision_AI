@@ -1,0 +1,82 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Sun, Moon, Leaf, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+export default function Navbar() {
+  const [dark, setDark] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  // Save preference
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      setDark(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (dark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+    setDark(!dark);
+  };
+
+  return (
+    <nav className="fixed w-full z-50 backdrop-blur-md bg-white/80 dark:bg-[#0f1f14]/90 border-b border-green-200 dark:border-green-900 transition-all">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+        {/* Logo */}
+        <div className="flex items-center gap-2 text-2xl font-bold text-green-600 dark:text-green-400">
+          <Leaf />
+          AgroVision AI
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-6 text-green-700 dark:text-green-300">
+
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-green-100 dark:bg-green-800 hover:scale-110 transition"
+          >
+            {dark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+        </div>
+
+        {/* Mobile */}
+        <div className="md:hidden flex items-center gap-3">
+          <button onClick={toggleTheme}>
+            {dark ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+
+          <button onClick={() => setOpen(!open)}>
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -40 }}
+            className="md:hidden px-6 pb-6 bg-white dark:bg-[#0f1f14] text-green-700 dark:text-green-300"
+          >
+            <p className="py-2">Dashboard</p>
+            <p className="py-2">Scan</p>
+            <p className="py-2">AI Support</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}
