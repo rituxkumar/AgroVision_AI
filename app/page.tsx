@@ -1,11 +1,7 @@
-import React from 'react'
-
-const page = () => {
+export default function Home() {
   return (
-    <div className='bg-green-500 h-[100vh] text-4xl text-white'>
-      Agrovision AI
+    <div>
+      <h1 className="text-white bg-green-500">Agrovision</h1>
     </div>
-  )
+  );
 }
-
-export default page
