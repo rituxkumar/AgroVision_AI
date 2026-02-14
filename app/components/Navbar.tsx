@@ -64,7 +64,7 @@ export default function Navbar() {
           </button>
 
           <button onClick={() => setOpen(!open)}>
-            {open ? <X className=" text-black" size={24} /> : <Menu className="text-black dark:text-white" size={24} />}
+            {open ? <X className=" dark:text-white" size={24} /> : <Menu className="text-black dark:text-white" size={24} />}
           </button>
         </div>
       </div>

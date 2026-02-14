@@ -7,13 +7,13 @@ import { ThreeDCardDemo } from "./components/ThreeDCardDemo";
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0f1f14] transition-colors duration-300">
-      <Navbar />
+
       <Hero />
       <Chatbot />
-     
-      <SparklesPreview/>
- {/* feature sction  */}
-      <ThreeDCardDemo/>
+
+      <SparklesPreview />
+      {/* feature sction  */}
+      <ThreeDCardDemo />
       <HowitWorks />
 
 
