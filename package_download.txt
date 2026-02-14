@@ -1,2 +1,3 @@
 npm i framer-motion
 npm i lucide-react
+npm install jspdf
