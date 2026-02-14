@@ -18,7 +18,7 @@ export default function Home() {
       <ThreeDCardDemo />
       <HowItWorks />
       <Testimonials />
-      <Footer />
+      {/* <Footer /> */}
 
 
 

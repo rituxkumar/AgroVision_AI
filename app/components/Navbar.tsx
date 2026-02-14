@@ -44,9 +44,9 @@ export default function Navbar() {
           <div className="flex  gap-5 font-bold">
             <Link href={'/'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Explore</p></Link>
 
-            <Link href={'/'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Contact</p></Link>
-            <Link href={'/'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">About</p></Link>
-            <Link href={'/'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Login</p></Link>
+            <Link href={'/contact'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Contact</p></Link>
+            <Link href={'/about'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">About</p></Link>
+            <Link href={'/login'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Login</p></Link>
           </div>
           <button
             onClick={toggleTheme}

@@ -40,7 +40,7 @@ const testimonials: Testimonial[] = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-black via-green-950 to-black">
+    <section className="py-20 px-6 dark:bg-gradient-to-b from-black via-green-950 to-black">
 
       {/* Heading */}
       <div className="text-center mb-16">
