@@ -52,3 +52,15 @@ Testomonial
 Footer
 Policy
 
+Why Choose Us Section
+85%+ Accuracy
+Instant Detection
+Easy to Use
+Built for Farmers
+
+
+Stats Section
+10,000+ Scans
+95% Accuracy
+500+ Farmers Helped
+24/7 AI Support
