@@ -1,0 +1,16 @@
+NavBar   ✔
+DarkMode   ✔
+
+----------------------------PAGE-----------------------------
+About 
+Contact
+Learn More  (full working explain here)
+
+
+----------------------------section---------------------------
+
+How It Works
+Testomonial
+Footer
+Policy
+

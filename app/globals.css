@@ -84,3 +84,7 @@ animation: gradientText 6s ease infinite;
 .animate-rotate {
   animation: rotate-border 4s linear infinite;
 }
+
+.glow {
+  box-shadow: 0 0 20px rgba(34,197,94,0.4);
+}
