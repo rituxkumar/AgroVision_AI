@@ -70,3 +70,17 @@ animation: gradientText 6s ease infinite;
   animation: aiColorFlow 5s linear infinite;
   text-shadow: 0 0 8px currentColor;
 }
+
+
+@keyframes rotate-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate {
+  animation: rotate-border 4s linear infinite;
+}

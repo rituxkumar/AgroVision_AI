@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
     return (
@@ -25,11 +26,14 @@ export default function Hero() {
                     </p>
 
                     <div className="mt-8 flex gap-4">
-                        <button className="px-6 py-3 bg-green-600 text-white rounded-xl shadow-lg hover:scale-105 transition transform">
+                        <Link href={'/scan'}>
+                       
+                        <button className=" cursor-pointer px-6 py-3 font-bold bg-[#016630] text-white rounded-xl shadow-lg hover:scale-105 transition transform">
                             🌱 Scan Leaf Now
                         </button>
+                         </Link>
 
-                        <button className="px-6 py-3 border border-green-600 text-green-700 dark:text-green-400 rounded-xl hover:bg-green-100 dark:hover:bg-green-900 transition">
+                        <button className="px-6 cursor-pointer font-bold py-3 border border-green-600 text-green-700 dark:text-green-400 rounded-xl hover:bg-green-100 dark:hover:bg-green-900 transition">
                             Learn More
                         </button>
                     </div>
