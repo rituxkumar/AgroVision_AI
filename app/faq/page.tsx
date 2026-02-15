@@ -45,9 +45,9 @@ export default function FAQPage() {
       className="
       min-h-screen
       px-6 py-20
-      bg-gradient-to-b
-      from-white via-green-50 to-white
-      dark:from-black dark:via-green-950 dark:to-black
+   
+     
+      dark:bg-[#0F1F14]
     "
     >
 
@@ -60,11 +60,11 @@ export default function FAQPage() {
 
         <Leaf className="mx-auto text-green-500 w-14 h-14 mb-4 animate-pulse" />
 
-        <h1 className="text-5xl font-bold text-green-500 mb-4">
+        <h1 className="text-5xl font-bold text-[#F0B100] mb-4">
           Frequently Asked Questions
         </h1>
 
-        <p className="text-gray-700 dark:text-green-200 text-lg">
+        <p className="text-gray-900 dark:text-white text-lg">
           Find answers to common questions about AgroVision AI
         </p>
 
@@ -95,7 +95,7 @@ export default function FAQPage() {
               onClick={() => toggle(index)}
               className="
               w-full flex justify-between items-center
-              p-5 text-left
+              p-5 text-left cursor-pointer
             "
             >
 
@@ -130,7 +130,7 @@ export default function FAQPage() {
                   className="px-5 pb-5"
                 >
 
-                  <p className="text-gray-700 dark:text-green-200">
+                  <p className="text-gray-900 dark:text-green-200">
                     {faq.answer}
                   </p>
 

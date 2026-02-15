@@ -34,6 +34,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
+        <Link href={'/'}></Link>
+        
         <div className=" text-[12px] flex items-center gap-2 sm:text-2xl font-bold text-green-600 dark:text-green-400">
           <Leaf />
           AgroVision AI
@@ -45,16 +47,16 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6 text-green-700 dark:text-green-300">
           <div className="flex  gap-5 font-bold">
-            <Link href={'/'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Explore</p></Link>
+            <Link href={'/'}> <p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c]  dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Explore</p></Link>
 
-            <Link href={'/contact'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Contact</p></Link>
-            <Link href={'/about'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">About</p></Link>
-            <Link href={'/login'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Login</p></Link>
+            <Link href={'/contact'}><p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Contact</p></Link>
+            <Link href={'/about'}><p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">About</p></Link>
+            <Link href={'/login'}> <p className="bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Login</p></Link>
             {/* <Link href={'/faq'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">FAQ</p></Link> */}
           </div>
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-green-100 dark:bg-green-800 hover:scale-110 transition"
+            className="p-2 rounded-full bg-green-100 dark:bg-green-800 hover:scale-110 transition cursor-pointer"
           >
             {dark ? <Sun size={18} /> : <Moon size={18} />}
           </button>

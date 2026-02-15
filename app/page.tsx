@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Chatbot from "./components/Chatbot";
-import HowItWorks from "./components/HowItWorks";
+import HowItWorks from "./components/HowitWorks";
 import { SparklesPreview } from "./components/SparklesPreview";
 import { ThreeDCardDemo } from "./components/ThreeDCardDemo";
 import Testimonials from "./components/Testimonials";

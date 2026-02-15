@@ -1,121 +1,97 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
-interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  message: string;
-  image: string;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Rajesh Kumar",
-    role: "Farmer, Punjab",
-    message:
-      "AgroVision AI helped me detect crop disease early. I saved my entire wheat crop and improved yield.",
-    image: "/farmer1.jpeg",
-  },
-  {
-    id: 2,
-    name: "Amit Sharma",
-    role: "Farmer, Haryana",
-    message:
-      "The AI detection is fast and accurate. Treatment suggestions are very useful.",
-    image: "/farmer2.jpeg",
-  },
-  {
-    id: 3,
-    name: "Suresh Patel",
-    role: "Farmer, Gujarat",
-    message:
-      "Easy to use and very powerful tool. Highly recommended for farmers.",
-    image: "/farmer3.jpeg",
-  },
+const testimonials = [
+  { id: 1, name: "Rinki Kumari", role: "Punjab", message: "AgroVision AI saved my wheat crop.", image: "/farmer1.jpeg" },
+  { id: 2, name: "Amit Sharma", role: "Haryana", message: "Very accurate detection system.", image: "/farmer2.jpeg" },
+  { id: 3, name: "Suresh Patel", role: "Gujarat", message: "Easy to use and helpful.", image: "/farmer3.jpeg" },
+  { id: 4, name: "Meena Devi", role: "Rajasthan", message: "AI chat support is amazing.", image: "/farmer1.jpeg" },
+  { id: 5, name: "Raj Verma", role: "UP", message: "Confidence score is very helpful.", image: "/farmer2.jpeg" },
+  { id: 6, name: "Anil Kumar", role: "MP", message: "Saved my crops from infection.", image: "/farmer3.jpeg" },
+  { id: 7, name: "Pooja Singh", role: "Bihar", message: "Nearby shop feature is useful.", image: "/farmer1.jpeg" },
+  { id: 8, name: "Harpreet Gill", role: "Punjab", message: "Highly recommended tool.", image: "/farmer2.jpeg" },
+  { id: 9, name: "Kiran Yadav", role: "Maharashtra", message: "Very powerful AI system.", image: "/farmer3.jpeg" },
+  { id: 10, name: "Manoj Singh", role: "Haryana", message: "Improved my crop yield.", image: "/farmer1.jpeg" },
 ];
+
+// Duplicate for infinite loop illusion
+const infiniteTestimonials = [...testimonials, ...testimonials];
 
 export default function Testimonials() {
   return (
-    <section className="py-20 px-6 dark:bg-gradient-to-b from-black via-green-950 to-black">
+    <section className="py-20 overflow-hidden dark:bg-[#0F1F14] px-12">
 
-      {/* Heading */}
       <div className="text-center mb-16">
-
-        <h2 className="text-4xl md:text-5xl font-bold text-green-400 mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#F0B100] mb-4">
           What Farmers Say
         </h2>
-
-        <p className="text-green-200 max-w-2xl mx-auto">
-          Trusted by farmers across India to protect their crops using AI.
-        </p>
-
       </div>
 
-      {/* Cards */}
-      <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-
-        {testimonials.map((t) => (
-          <div
-            key={t.id}
-            className="
-              bg-black/40
-              backdrop-blur-lg
-              border border-green-500/20
-              rounded-xl
-              p-6
-              hover:border-green-400
-              hover:shadow-green-500/30
-              hover:shadow-lg
-              hover:scale-105
-              transition-all duration-300
-            "
-          >
-
-            {/* Stars */}
-            <div className="flex mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-5 h-5 text-green-400 fill-green-400"
-                />
-              ))}
-            </div>
-
-            {/* Message */}
-            <p className="text-green-200 mb-6">
-              "{t.message}"
-            </p>
-
-            {/* User */}
-            <div className="flex items-center gap-4">
-
-              <img
-                src={t.image}
-                alt={t.name}
-                className="w-12 h-12 rounded-full border border-green-400"
-              />
-
-              <div>
-                <h4 className="text-green-300 font-semibold">
-                  {t.name}
-                </h4>
-
-                <p className="text-green-500 text-sm">
-                  {t.role}
-                </p>
+      <div className="relative w-full overflow-hidden">
+        
+        <motion.div
+          className="flex gap-8"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            repeat: Infinity,
+            duration: 25,
+            ease: "linear",
+          }}
+        >
+          {infiniteTestimonials.map((t, i) => (
+            <div
+              key={i}
+              className="
+                min-w-[300px]
+                md:min-w-[350px]
+                bg-[#E5E7EB]
+                dark:bg-black/40
+                backdrop-blur-lg
+                border border-green-500/20
+                rounded-xl
+                p-6
+                hover:border-green-400
+                hover:shadow-green-500/30
+                hover:shadow-lg
+                transition-all duration-300
+              "
+            >
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, idx) => (
+                  <Star
+                    key={idx}
+                    className="w-5 h-5 text-yellow-500 fill-yellow-100"
+                  />
+                ))}
               </div>
 
-            </div>
+              <p className="text-black mb-6 dark:text-white">
+                "{t.message}"
+              </p>
 
-          </div>
-        ))}
+              <div className="flex items-center gap-4">
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-12 h-12 rounded-full border border-green-400"
+                />
+                <div>
+                  <h4 className="text-black dark:text-gray-200 font-semibold">
+                    {t.name}
+                  </h4>
+                  <p className="text-green-600 text-sm">
+                    {t.role}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
       </div>
-
     </section>
   );
 }

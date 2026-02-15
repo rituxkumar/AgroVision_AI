@@ -168,7 +168,7 @@ export default function ScanPage() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="max-w-3xl mx-auto bg-white dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
+                className="max-w-3xl mx-auto bg-[#DBFCE7] dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
             >
                 {!image ? (
                     <label className="flex flex-col items-center justify-center border-2 border-dashed border-green-400 rounded-xl p-10 cursor-pointer hover:bg-green-50 dark:hover:bg-green-900 transition">
@@ -218,7 +218,7 @@ export default function ScanPage() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="max-w-4xl mx-auto mt-16 bg-white dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
+                    className="max-w-4xl mx-auto mt-16 bg-[#DBFCE7] dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
                 >
                     <h2 className="text-3xl text-green-700 dark:text-green-400 mb-8 text-center font-bold">
                         Scan Result
@@ -247,11 +247,11 @@ export default function ScanPage() {
                             </div>
                         </div>
 
-                        <div className="bg-green-50 dark:bg-green-900 p-6 rounded-xl">
+                        <div className="bg-green-50 dark:bg-[#284131b9] p-6 rounded-xl">
                             <p className="font-semibold text-green-700 dark:text-green-300">
                                 Recommended Action:
                             </p>
-                            <p className="mt-3 text-gray-700 dark:text-gray-200">
+                            <p className="mt-3 text-gray-700 dark:text-gray-100">
                                 Apply treatment immediately and monitor crop condition for the
                                 next 5-7 days. Avoid overwatering and ensure proper sunlight.
                             </p>
@@ -288,12 +288,12 @@ export default function ScanPage() {
                     <div className="mt-6 inline-block relative rounded-xl p-[2px] overflow-hidden">
 
                         {/* Rotating gradient border */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-yellow-400 to-green-500 animate-rotate rounded-xl"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-yellow-400 to-green-500 animate-rotate rounded-xl dark:bg-yellow-300"></div>
 
                         {/* Actual button */}
                         <button
                             onClick={handleDownloadPDF}
-                            className="relative px-6 cursor-pointer py-2 bg-[#0f1f14] text-white font-semibold rounded-xl hover:scale-105 transition duration-300"
+                            className="relative px-6 cursor-pointer py-2 bg-[#0f1f14] text-white font-semibold rounded-xl hover:scale-105 transition duration-300 dark:bg-yellow-800"
                         >
                             Download PDF
                         </button>

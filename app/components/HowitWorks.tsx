@@ -16,42 +16,42 @@ const steps: Step[] = [
     title: "Upload Leaf Image",
     description:
       "Take a photo or upload an image of the crop leaf using your device.",
-    icon: <Upload className="w-8 h-8 text-green-400" />,
+    icon: <Upload className="w-8 h-8 text-blue-700" />,
   },
   {
     id: 2,
     title: "AI Scans the Image",
     description:
       "Our AI model analyzes the image using advanced deep learning.",
-    icon: <Scan className="w-8 h-8 text-green-400" />,
+    icon: <Scan className="w-8 h-8 text-blue-700" />,
   },
   {
     id: 3,
     title: "Detect Disease",
     description:
       "AI detects disease and calculates confidence score instantly.",
-    icon: <Brain className="w-8 h-8 text-green-400" />,
+    icon: <Brain className="w-8 h-8 text-blue-700" />,
   },
   {
     id: 4,
     title: "Get Treatment Advice",
     description:
       "Receive treatment suggestions and recommendations immediately.",
-    icon: <FileText className="w-8 h-8 text-green-400" />,
+    icon: <FileText className="w-8 h-8 text-blue-700" />,
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="relative py-20 px-6 bg-gradient-to-b from-black via-green-950 to-black">
+    <section className="relative py-20 px-6 bg-white dark:bg-[#0F1F14] ">
 
       {/* Heading */}
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-yellow-500  mb-4">
           How It Works
         </h2>
 
-        <p className="text-green-200 max-w-2xl mx-auto">
+        <p className=" dark:text-white max-w-2xl mx-auto">
           Our AI-powered system detects crop diseases in seconds using advanced image analysis.
         </p>
       </div>
@@ -64,7 +64,8 @@ export default function HowItWorks() {
             key={step.id}
             className="
               group
-              bg-black/40
+              bg-[#E5E7EB]
+              dark:bg-black/40
               backdrop-blur-lg
               border border-green-500/20
               rounded-xl
@@ -77,22 +78,22 @@ export default function HowItWorks() {
           >
 
             {/* Icon */}
-            <div className="mb-4">
+            <div className="mb-4 text-blue-800">
               {step.icon}
             </div>
 
             {/* Step number */}
-            <div className="text-green-500 font-bold mb-2">
+            <div className="text-black dark:text-green-500 font-bold mb-2">
               Step {step.id}
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-semibold text-green-300 mb-2">
+            <h3 className="text-xl font-semibold text-green-800 dark:text-green-500 mb-2">
               {step.title}
             </h3>
 
             {/* Description */}
-            <p className="text-green-200 text-sm">
+            <p className="text-black dark:text-white text-sm">
               {step.description}
             </p>
 

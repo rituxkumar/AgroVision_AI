@@ -133,7 +133,7 @@ export default function Weather() {
 
       
 
-      <span className="flex items-center gap-1 text-gray-600">
+      <span className="flex items-center gap-1 text-gray-600 dark:text-white">
 
         <MapPin size={14} />
         <p className="text-[11px] sm:text-xl text-center">
