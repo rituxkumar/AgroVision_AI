@@ -6,6 +6,7 @@ import { SparklesPreview } from "./components/SparklesPreview";
 import { ThreeDCardDemo } from "./components/ThreeDCardDemo";
 import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
+import FAQPage from "./faq/page";
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0f1f14] transition-colors duration-300">
@@ -17,7 +18,9 @@ export default function Home() {
       {/* feature sction  */}
       <ThreeDCardDemo />
       <HowItWorks />
+      <FAQPage/>
       <Testimonials />
+      
       {/* <Footer /> */}
 
 

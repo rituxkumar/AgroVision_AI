@@ -47,7 +47,7 @@ export default function HowItWorks() {
 
       {/* Heading */}
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-green-400 mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
           How It Works
         </h2>
 

@@ -16,7 +16,7 @@ export default function Hero() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h1 className="text-4xl md:text-6xl font-bold text-green-700 dark:text-green-400 leading-tight">
+                    <h1 className="text-4xl md:text-6xl font-bold text-green-700 dark:text-white leading-tight">
                         Smart Crop Disease Detection
                     </h1>
 

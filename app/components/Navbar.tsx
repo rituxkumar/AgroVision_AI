@@ -1,5 +1,5 @@
 "use client";
-
+import Weather from "./ui/weather";
 import { useState, useEffect } from "react";
 import { Sun, Moon, Leaf, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -34,9 +34,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
-        <div className="flex items-center gap-2 text-2xl font-bold text-green-600 dark:text-green-400">
+        <div className=" text-[12px] flex items-center gap-2 sm:text-2xl font-bold text-green-600 dark:text-green-400">
           <Leaf />
           AgroVision AI
+          <div>
+            <Weather />
+          </div>
         </div>
 
         {/* Desktop Menu */}
@@ -47,6 +50,7 @@ export default function Navbar() {
             <Link href={'/contact'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Contact</p></Link>
             <Link href={'/about'}><p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">About</p></Link>
             <Link href={'/login'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">Login</p></Link>
+            {/* <Link href={'/faq'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">FAQ</p></Link> */}
           </div>
           <button
             onClick={toggleTheme}
