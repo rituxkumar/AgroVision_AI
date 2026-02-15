@@ -67,7 +67,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           className="
-          bg-white/70 dark:bg-black/40
+          bg-[#DBFCE7] dark:bg-black/40
           backdrop-blur-xl
           border border-green-500/20
           rounded-xl
@@ -152,7 +152,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           className="
-          bg-white/70 dark:bg-black/40
+         bg-[#DBFCE7] dark:bg-black/40
           backdrop-blur-xl
           border border-green-500/20
           rounded-xl

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Sun, Moon, Leaf, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [dark, setDark] = useState(false);
@@ -31,28 +32,31 @@ export default function Navbar() {
 
   return (
     <nav className="fixed w-full z-50 backdrop-blur-md bg-white/80 dark:bg-[#0f1f14]/90 border-b border-green-200 dark:border-green-900 transition-all">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
-        <Link href={'/'}></Link>
-        
-        <div className=" text-[12px] flex items-center gap-2 sm:text-2xl font-bold text-green-600 dark:text-green-400">
-          <Leaf />
-          AgroVision AI
-          <div>
+        <Link href={'/'}>
+           <img src={'./main_logo.png'} className="h-11 sm:h-12 "/>
+           </Link>
+           <div>
             <Weather />
           </div>
+        
+        <div className=" text-[12px] flex items-center gap-2 sm:text-2xl font-bold text-green-600 dark:text-green-400">
+         
+          
+          
         </div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6 text-green-700 dark:text-green-300">
           <div className="flex  gap-5 font-bold">
-            <Link href={'/'}> <p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c]  dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Explore</p></Link>
+            <Link href={'/scan'}> <p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c]  dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Explore</p></Link>
 
             <Link href={'/contact'}><p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Contact</p></Link>
             <Link href={'/about'}><p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">About</p></Link>
             <Link href={'/login'}> <p className="bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Login</p></Link>
-            {/* <Link href={'/faq'}> <p className="bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer hover:bg-green-800/30">FAQ</p></Link> */}
+            {/* <Link href={'/faq'}> <p  className="bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30"">FAQ</p></Link> */}
           </div>
           <button
             onClick={toggleTheme}

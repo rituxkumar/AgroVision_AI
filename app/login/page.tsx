@@ -43,7 +43,7 @@ export default function LoginPage() {
         className="
         relative
         w-full max-w-md
-        bg-white/70 dark:bg-black/40
+        bg-[#DBFCE7] dark:bg-black/40
         backdrop-blur-xl
         border border-green-500/20
         rounded-2xl

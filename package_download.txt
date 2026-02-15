@@ -1,3 +1,4 @@
 npm i framer-motion
 npm i lucide-react
 npm install jspdf
+npm install @marsidev/react-turnstile

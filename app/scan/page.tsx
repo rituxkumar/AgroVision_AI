@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import jsPDF from "jspdf";
+// import Turnstile from "@marsidev/react-turnstile";
+
+
 
 import {
     Upload,
@@ -13,11 +16,14 @@ import {
     Store,
     BarChart3,
 } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function ScanPage() {
     const [image, setImage] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any>(null);
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
 
     const handleImageUpload = (e: any) => {
         const file = e.target.files[0];
@@ -136,6 +142,11 @@ export default function ScanPage() {
 
     const handleAnalyze = async () => {
         setLoading(true);
+        if (!captchaToken) {
+              alert("Please verify CAPTCHA first.");
+              return;
+        }
+
 
         setTimeout(() => {
             const randomIndex = Math.floor(Math.random() * dummyResults.length);
@@ -191,12 +202,40 @@ export default function ScanPage() {
                             className="mx-auto h-64 object-cover rounded-xl shadow-md"
                         />
 
-                        <button
+                        {/* <button
                             onClick={handleAnalyze}
                             className="mt-8 px-8 py-3 font-bold cursor-pointer bg-green-600 text-white rounded-xl hover:scale-105 transition flex items-center justify-center gap-3 mx-auto"
                         >
                             <ImageIcon size={20} /> Analyze Leaf
+                        </button> */}
+
+                        <button
+                            onClick={handleAnalyze}
+                            disabled={!captchaToken}
+                            className={`mt-8 px-8 py-3 font-bold rounded-xl transition flex items-center justify-center gap-3 mx-auto
+    ${captchaToken
+                                    ? "bg-green-600 text-white hover:scale-105 cursor-pointer"
+                                    : "bg-gray-400 text-gray-200 cursor-not-allowed"
+                                }`}
+                        >
+                            <ImageIcon size={20} /> Analyze Leaf
                         </button>
+
+                        <div className="mt-6 flex justify-center">
+                            <Turnstile
+                                siteKey="0x4AAAAAACdIaBkh6BeQgjgr"
+                                onSuccess={(token) => {
+                                    setCaptchaToken(token);
+                                }}
+                                onExpire={() => {
+                                    setCaptchaToken(null);
+                                }}
+                                options={{
+                                    theme: "auto",
+                                }}
+                            />
+                        </div>
+
                     </div>
                 )}
             </motion.div>
@@ -259,7 +298,7 @@ export default function ScanPage() {
 
 
 
-                                <button onClick={handleBuyMedicine} className= " cursor-pointer mt-6 px-6 py-2 bg-green-700 text-white rounded-lg hover:scale-105 transition">
+                                <button onClick={handleBuyMedicine} className=" cursor-pointer mt-6 px-6 py-2 bg-green-700 text-white rounded-lg hover:scale-105 transition">
                                     Buy Medicine Online
                                 </button>
                                 <button

@@ -16,7 +16,7 @@ export default function AboutPage() {
       className="
       min-h-screen
       px-6 py-20
-      bg-gradient-to-b
+      bg-linear-to-b
       from-white via-green-50 to-white
       dark:from-black dark:via-green-950 dark:to-black
       transition-colors duration-500
@@ -49,7 +49,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="
-          bg-white/70 dark:bg-black/40
+          bg-[#DBFCE7] dark:bg-black/40
           backdrop-blur-xl
           border border-green-500/20
           rounded-xl
@@ -77,7 +77,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="
-          bg-white/70 dark:bg-black/40
+          bg-[#DBFCE7] dark:bg-black/40
           backdrop-blur-xl
           border border-green-500/20
           rounded-xl
@@ -105,7 +105,7 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="
-          bg-white/70 dark:bg-black/40
+          bg-[#DBFCE7] dark:bg-black/40
           backdrop-blur-xl
           border border-green-500/20
           rounded-xl
