@@ -2,3 +2,10 @@ npm i framer-motion
 npm i lucide-react
 npm install jspdf
 npm install @marsidev/react-turnstile
+
+
+---------------------------------------------------
+Site Key
+0x4AAAAAACdIaBkh6BeQgjgr
+secret
+0x4AAAAAACdIaNpmUQ1eF5xqJFemQ7q-bPI

@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { Sun, Moon, Leaf, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-
+import UserMenu from "./UserMenu";
 export default function Navbar() {
   const [dark, setDark] = useState(false);
   const [open, setOpen] = useState(false);
@@ -57,6 +56,7 @@ export default function Navbar() {
             <Link href={'/about'}><p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">About</p></Link>
             <Link href={'/login'}> <p className="bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Login</p></Link>
             {/* <Link href={'/faq'}> <p  className="bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30"">FAQ</p></Link> */}
+         <UserMenu />
           </div>
           <button
             onClick={toggleTheme}
