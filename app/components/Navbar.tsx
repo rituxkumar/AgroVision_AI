@@ -35,16 +35,16 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href={'/'}>
-           <img src={'./main_logo.png'} className="h-11 sm:h-12 "/>
-           </Link>
-           <div>
-            <Weather />
-          </div>
-        
+          <img src={'./main_logo.png'} className="h-11 sm:h-12 " />
+        </Link>
+        <div>
+          <Weather />
+        </div>
+
         <div className=" text-[12px] flex items-center gap-2 sm:text-2xl font-bold text-green-600 dark:text-green-400">
-         
-          
-          
+
+
+
         </div>
 
         {/* Desktop Menu */}
@@ -55,8 +55,7 @@ export default function Navbar() {
             <Link href={'/contact'}><p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Contact</p></Link>
             <Link href={'/about'}><p className=" bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">About</p></Link>
             <Link href={'/login'}> <p className="bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30">Login</p></Link>
-            {/* <Link href={'/faq'}> <p  className="bg-[#DBFCE7] hover:bg-[#dbfce78c] dark:bg-green-800/40 px-3 py-1 rounded-xl cursor-pointer dark:hover:bg-green-800/30"">FAQ</p></Link> */}
-         <UserMenu />
+
           </div>
           <button
             onClick={toggleTheme}
@@ -88,9 +87,20 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -40 }}
             className="md:hidden px-6 pb-6 bg-white dark:bg-[#0f1f14] text-green-700 dark:text-green-300"
           >
-            <p className="py-2">Dashboard</p>
-            <p className="py-2">Scan</p>
-            <p className="py-2">AI Support</p>
+            <Link href={"/dashboard"} onClick={() => setOpen(!open)} >
+              <p className="py-2">Dashboard</p>
+            </Link>
+            <Link href={"/dashboard"} onClick={() => setOpen(!open)} >
+              <p className="py-2">History</p>
+            </Link>
+            <Link href={"/LearnMore"} onClick={() => setOpen(!open)}  >
+              <p className="py-2">Learn More</p>
+            </Link>
+            <Link href={"/"} onClick={() => setOpen(!open)} >
+              <p className="py-2">LogOut</p>
+            </Link>
+
+
           </motion.div>
         )}
       </AnimatePresence>
