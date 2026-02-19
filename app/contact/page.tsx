@@ -37,7 +37,7 @@ export default function ContactPage() {
     "
     >
 
-      {/* Hero Section */}
+     
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -58,11 +58,11 @@ export default function ContactPage() {
       </motion.div>
 
 
-      {/* Main Grid */}
+      
       <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
 
 
-        {/* Contact Form */}
+      
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
@@ -147,7 +147,7 @@ export default function ContactPage() {
         </motion.div>
 
 
-        {/* Contact Info */}
+      
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
