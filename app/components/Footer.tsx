@@ -91,12 +91,12 @@ export default function Footer() {
 
               <div className="flex items-center gap-2  dark:text-white">
                 <Phone className="w-4 h-4 text-black dark:text-white" />
-                +91 9876543210
+                +91 748-841-9240
               </div>
 
               <div className="flex items-center gap-2 text-black dark:text-white">
                 <MapPin className="w-4 h-4 text-black dark:text-white" />
-                India
+                Patna
               </div>
 
             </div>
