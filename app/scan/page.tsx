@@ -94,39 +94,6 @@ export default function ScanPage() {
     };
 
 
-    const dummyResults = [
-        {
-            disease: "Leaf Rust",
-            confidence: "92%",
-            medicine: "Mancozeb Fungicide",
-            shop: "Krishi Agro Center - 2km away",
-        },
-        {
-            disease: "Powdery Mildew",
-            confidence: "88%",
-            medicine: "Sulfur Fungicide Spray",
-            shop: "GreenField Agro Store - 1.5km away",
-        },
-        {
-            disease: "Bacterial Blight",
-            confidence: "90%",
-            medicine: "Copper Oxychloride",
-            shop: "FarmCare Supplies - 3km away",
-        },
-        {
-            disease: "Early Leaf Spot",
-            confidence: "85%",
-            medicine: "Chlorothalonil Spray",
-            shop: "Agro Mart - 2.8km away",
-        },
-        {
-            disease: "Downy Mildew",
-            confidence: "93%",
-            medicine: "Metalaxyl Fungicide",
-            shop: "Kisan Agro Point - 1km away",
-        },
-    ];
-
     const handleWatchVideo = () => {
         if (!result?.disease) return;
 
@@ -139,17 +106,49 @@ export default function ScanPage() {
         window.open(youtubeURL, "_blank");
     };
 
-
- const handleAnalyze = async () => {
+const handleAnalyze = async () => {
   setLoading(true);
+  setResult(null);
 
-  setTimeout(() => {
-    const randomIndex = Math.floor(Math.random() * dummyResults.length);
-    setResult(dummyResults[randomIndex]);
-    setLoading(false);
-  }, 2500);
+  try {
+    const fileInput = document.querySelector('input[type="file"]');
+    const file = fileInput.files[0];
+
+    if (!file) {
+      alert("Please upload image");
+      setLoading(false);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await fetch("http://127.0.0.1:8000/predict", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    console.log("API RESPONSE 👉", data);
+
+    const cleanName = data.class
+      .replace("___", " - ")
+      .replace(/_/g, " ");
+
+    setResult({
+      disease: cleanName,
+      confidence: data.confidence + " %",
+      medicine: "Coming soon",
+      shop: "Coming soon",
+    });
+
+  } catch (err) {
+    console.error(err);
+  }
+
+  setLoading(false);
 };
-
 
 
     return (
@@ -239,14 +238,14 @@ export default function ScanPage() {
                     className="max-w-4xl mx-auto mt-16 bg-[#DBFCE7] dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
                 >
                     <h2 className="text-3xl text-green-700 dark:text-green-400 mb-8 text-center font-bold">
-                        Scan Result
+                        Scan  
                     </h2>
 
                     <div className="grid md:grid-cols-2 gap-10">
                         <div className="space-y-6">
                             <div className="flex items-center gap-4">
                                 <Leaf className="text-green-600" />
-                                <p className="text-black dark:text-white "><strong>Disease:</strong> {result.disease}</p>
+                                <p className="text-black dark:text-white "><strong>Diseasem:</strong> {result.disease}</p>
                             </div>
 
                             <div className="flex items-center gap-4">
