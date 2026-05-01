@@ -3,18 +3,17 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
-  User, 
+  User as UserIcon, 
   Scan, 
   History, 
   ArrowRight, 
   Leaf, 
   Calendar,
-  Settings,
-  Bell,
   Activity
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import UserMenu from "../components/UserMenu";
 
 export default function Dashboard() {
   const [user, setUser] = useState<{ username: string; email: string } | null>(null);
@@ -64,13 +63,11 @@ export default function Dashboard() {
               Monitor your crops and detect potential threats in real-time.
             </p>
           </div>
-          <div className="flex gap-3">
-            <button className="p-3 bg-white dark:bg-[#13281b] border border-green-200 dark:border-green-800 rounded-xl shadow-sm hover:bg-green-50 dark:hover:bg-green-900 transition">
-              <Bell size={20} className="text-green-600" />
-            </button>
-            <button className="p-3 bg-white dark:bg-[#13281b] border border-green-200 dark:border-green-800 rounded-xl shadow-sm hover:bg-green-50 dark:hover:bg-green-900 transition">
-              <Settings size={20} className="text-green-600" />
-            </button>
+          <div className="flex items-center gap-4">
+            {/* Professional Profile Avatar */}
+            <div className="pl-4">
+              <UserMenu />
+            </div>
           </div>
         </motion.div>
 
@@ -156,23 +153,6 @@ export default function Dashboard() {
               </button>
             </div>
           </div>
-        </motion.div>
-
-        {/* Profile Card Summary */}
-        <motion.div variants={itemVariants} className="mt-12 p-8 bg-green-50 dark:bg-green-900/20 rounded-3xl border border-green-200 dark:border-green-800 flex flex-col md:flex-row items-center gap-6">
-          <div className="w-16 h-16 rounded-full bg-green-600 flex items-center justify-center text-white text-2xl font-bold">
-            {user?.username?.charAt(0).toUpperCase() || <User />}
-          </div>
-          <div className="flex-1 text-center md:text-left">
-            <h4 className="text-xl font-bold text-green-800 dark:text-green-200">{user?.username}</h4>
-            <p className="text-gray-600 dark:text-gray-400">{user?.email}</p>
-          </div>
-          <button 
-            onClick={() => router.push("/history")}
-            className="px-6 py-2 border-2 border-green-600 text-green-600 rounded-xl font-bold hover:bg-green-600 hover:text-white transition"
-          >
-            Manage Profile
-          </button>
         </motion.div>
       </motion.div>
     </div>
