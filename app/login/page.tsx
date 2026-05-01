@@ -1,23 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Mail, Lock, Leaf } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Lock, Leaf, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.type]: e.target.value });
+    setError("");
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setLoading(true);
+    setError("");
 
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Invalid credentials");
+      }
+
+      // Store user info in localStorage for client-side UI usage
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      // Redirect to dashboard
+      router.push("/dashboard");
+      router.refresh(); // Refresh to update middleware state
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
       setLoading(false);
-      alert("Login successful (demo)");
-    }, 2000);
+    }
   };
 
   return (
@@ -31,10 +62,8 @@ export default function LoginPage() {
       dark:from-black dark:via-green-950 dark:to-black
     "
     >
-
       {/* Background glow */}
-      <div className="absolute w-96 h-96 bg-green-500/20 blur-3xl rounded-full"></div>
-
+      <div className="absolute w-96 h-96 bg-green-500/20 blur-3xl rounded-full pointer-events-none"></div>
 
       {/* Login Card */}
       <motion.div
@@ -52,7 +81,6 @@ export default function LoginPage() {
         shadow-lg
       "
       >
-
         {/* Logo */}
         <motion.div
           initial={{ scale: 0 }}
@@ -63,7 +91,6 @@ export default function LoginPage() {
           <Leaf className="text-green-500 w-12 h-12 animate-pulse" />
         </motion.div>
 
-
         {/* Heading */}
         <h2 className="text-3xl font-bold text-green-500 text-center mb-2">
           Welcome Back
@@ -73,19 +100,31 @@ export default function LoginPage() {
           Login to AgroVision AI
         </p>
 
+        {/* Error message */}
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="flex items-center gap-2 mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm"
+            >
+              <AlertCircle size={16} />
+              <span>{error}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-4">
-
-
           {/* Email */}
           <div className="relative">
-
             <Mail className="absolute left-3 top-3 text-green-500" size={18} />
-
             <input
               type="email"
               required
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="Email Address"
               className="
               w-full pl-10 pr-4 py-3 rounded-lg
@@ -97,18 +136,16 @@ export default function LoginPage() {
               transition
             "
             />
-
           </div>
-
 
           {/* Password */}
           <div className="relative">
-
             <Lock className="absolute left-3 top-3 text-green-500" size={18} />
-
             <input
               type="password"
               required
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder="Password"
               className="
               w-full pl-10 pr-4 py-3 rounded-lg
@@ -120,9 +157,7 @@ export default function LoginPage() {
               transition
             "
             />
-
           </div>
-
 
           {/* Fancy Button */}
           <motion.button
@@ -132,6 +167,7 @@ export default function LoginPage() {
             }}
             whileTap={{ scale: 0.95 }}
             type="submit"
+            disabled={loading}
             className="
             w-full py-3 rounded-lg
             bg-green-500
@@ -139,9 +175,9 @@ export default function LoginPage() {
             text-white font-semibold
             transition
             relative overflow-hidden
+            disabled:opacity-50 disabled:cursor-not-allowed
           "
           >
-
             {loading ? (
               <motion.div
                 animate={{ rotate: 360 }}
@@ -154,11 +190,8 @@ export default function LoginPage() {
             ) : (
               "Login"
             )}
-
           </motion.button>
-
         </form>
-
 
         {/* Footer */}
         <p className="text-center text-gray-600 dark:text-green-200 mt-6">
@@ -169,9 +202,7 @@ export default function LoginPage() {
             </span>
           </Link>
         </p>
-
       </motion.div>
-
     </div>
   );
 }

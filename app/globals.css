@@ -9,6 +9,21 @@ html.dark {
   background-color: #0f1f14;
 }
 
+body {
+  cursor: default;
+  user-select: none; /* Prevents accidental text selection on decorative text */
+}
+
+/* Re-enable selection for inputs and actual content if needed */
+input, textarea, [contenteditable="true"] {
+  user-select: text;
+  cursor: text;
+}
+
+button, a, label, .cursor-pointer {
+  cursor: pointer;
+}
+
 /* Disable system-based dark mode */
 @media (prefers-color-scheme: dark) {
   :root {

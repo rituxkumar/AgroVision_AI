@@ -2,8 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Lock, Leaf, User, CheckCircle2, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   fullName: string;
@@ -13,6 +14,7 @@ type FormData = {
 };
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -31,7 +33,7 @@ export default function RegisterPage() {
     setError("");
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword) {
@@ -49,10 +51,34 @@ export default function RegisterPage() {
     setError("");
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+
       setSuccess(true);
-    }, 2000);
+      
+      // Automatic redirect after 2 seconds
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -282,6 +308,7 @@ export default function RegisterPage() {
             }}
             whileTap={{ scale: 0.95 }}
             type="submit"
+            disabled={loading}
             className="
               w-full py-3 rounded-lg
               bg-green-500
@@ -289,6 +316,7 @@ export default function RegisterPage() {
               text-white font-semibold
               transition
               relative overflow-hidden
+              disabled:opacity-50 disabled:cursor-not-allowed
             "
           >
             {loading ? (
