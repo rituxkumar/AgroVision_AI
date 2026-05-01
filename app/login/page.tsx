@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, Lock, Leaf } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -162,9 +163,11 @@ export default function LoginPage() {
         {/* Footer */}
         <p className="text-center text-gray-600 dark:text-green-200 mt-6">
           Don't have an account?{" "}
-          <span className="text-green-500 cursor-pointer hover:underline">
-            Register
-          </span>
+          <Link href="/register">
+            <span className="text-green-500 cursor-pointer hover:underline">
+              Register
+            </span>
+          </Link>
         </p>
 
       </motion.div>
