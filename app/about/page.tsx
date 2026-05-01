@@ -9,6 +9,7 @@ import {
   Users,
   Target,
 } from "lucide-react";
+import BackButton from "../components/ui/BackButton";
 
 export default function AboutPage() {
   return (
@@ -22,6 +23,10 @@ export default function AboutPage() {
       transition-colors duration-500
     "
     >
+      <div className="max-w-6xl mx-auto">
+        <BackButton />
+      </div>
+
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}

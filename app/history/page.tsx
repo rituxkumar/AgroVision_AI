@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { dummyHistory } from "@/lib/dummyData";
 import { Leaf, BarChart3, Calendar, Pill } from "lucide-react";
 import { useState } from "react";
+import BackButton from "../components/ui/BackButton";
 
 
 export default function HistoryPage() {
@@ -11,6 +12,8 @@ export default function HistoryPage() {
 
     return (
         <div className="min-h-screen px-6 md:px-20 py-20 bg-white dark:bg-[#0f1f14] transition-colors">
+            <BackButton />
+
             <h1 className="text-4xl font-bold text-green-700 dark:text-green-400 mb-10">
                 Scan History
             </h1>

@@ -18,6 +18,7 @@ import {
     Store,
     BarChart3,
 } from "lucide-react";
+import BackButton from "../components/ui/BackButton";
 
 
 export default function ScanPage() {
@@ -38,15 +39,44 @@ export default function ScanPage() {
             setResult(null);
         }
     };
-    const handleDownloadPDF = () => {
+
+    const getGeminiSolution = async (disease: string) => {
+        try {
+            const model = ai.getGenerativeModel({ model: "gemini-pro" });
+
+            const response = await model.generateContent({
+                contents: [{
+                    role: "user",
+                    parts: [{
+                        text: `suggest the Best medicine for this crop disease: ${disease}. also give 3 points of DOs and 3 points of DON'Ts for farmers. Finally, give the name of the medicine clearly in a section called 'MEDICINE'.`
+                    }]
+                }],
+                generationConfig: {
+                    maxOutputTokens: 500,
+                }
+            });
+
+            const result = await response.response;
+            const text = result.text();
+
+            return text || "No suggestions available";
+        } catch (err) {
+            console.error("Gemini Error:", err);
+            return "Failed to get AI suggestions";
+        }
+    };
+
+    const generatePDF = () => {
         if (!result) return;
 
         const doc = new jsPDF();
 
-        doc.setFontSize(18);
-        doc.text("AgroVision AI - Crop Disease Report", 20, 20);
+        doc.setFontSize(22);
+        doc.setTextColor(34, 197, 94);
+        doc.text("AgroVision AI - Diagnosis Report", 20, 20);
 
-        doc.setFontSize(14);
+        doc.setFontSize(16);
+        doc.setTextColor(0, 0, 0);
         doc.text(`Disease: ${result.disease}`, 20, 40);
         doc.text(`Confidence: ${result.confidence}`, 20, 50);
         doc.text(`Medicine: ${result.medicine}`, 20, 60);
@@ -91,39 +121,6 @@ export default function ScanPage() {
     };
 
 
-    const getGeminiSolution = async (disease: string) => {
-        try {
-            const response = await ai.models.generateContent({
-                model: "gemini-3-flash-preview", // ✅ latest working
-                contents: `
-Plant disease: ${disease}
-
-Return ONLY plain text. No code, no explanation.
-
-Format exactly like this:
-
-DO:
-1. ...
-2. ...
-3. ...
-
-DON'T:
-1. ...
-2. ...
-3. ...
-
-MEDICINE:
-Name: ...
-Use: ...
-`
-            });
-
-            return response.text || "No suggestions available";
-        } catch (err) {
-            console.error("Gemini Error:", err);
-            return "Failed to get AI suggestions";
-        }
-    };
     const handleBuyMedicine = () => {
         if (!result?.medicine) return;
 
@@ -133,13 +130,10 @@ Use: ...
         window.open(flipkartURL, "_blank");
     };
 
-
     const handleWatchVideo = () => {
         if (!result?.disease) return;
 
-        const query = encodeURIComponent(
-            `${result.disease} plant disease treatment`
-        );
+        const query = encodeURIComponent(result.disease + " treatment");
 
         const youtubeURL = `https://www.youtube.com/results?search_query=${query}`;
 
@@ -188,8 +182,13 @@ Use: ...
                 setLoadingGemini(false);
             });
 
-        } catch (err) {
-            console.error(err);
+        } catch (err: any) {
+            console.error("Fetch Error:", err);
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                alert("Backend server error: Please make sure your Python/FastAPI server is running at http://127.0.0.1:8000");
+            } else {
+                alert("An unexpected error occurred during analysis: " + err.message);
+            }
         }
 
         setLoading(false);
@@ -205,211 +204,147 @@ Use: ...
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-50 to-white dark:from-[#0f1f14] dark:to-[#0b1510] px-6 md:px-20 py-20 transition-colors">
+            <div className="max-w-6xl mx-auto">
+                <BackButton />
 
-            {/* Header */}
-            <motion.div
-                initial={{ opacity: 0, y: -40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-16"
-            >
-                <h1 className="text-5xl font-bold text-green-700 dark:text-green-400 flex justify-center items-center gap-4">
-                    <Leaf size={40} /> Scan Your Crop
-                </h1>
-                <p className="mt-4 text-gray-600 dark:text-gray-300 text-lg">
-                    Upload a leaf image and let AgroVision AI detect diseases instantly.
-                </p>
-            </motion.div>
-
-            {/* Upload Section */}
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="max-w-3xl mx-auto bg-[#DBFCE7] dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
-            >
-                {!image ? (
-                    <label className="flex flex-col items-center justify-center border-2 border-dashed border-green-400 rounded-xl p-10 cursor-pointer hover:bg-green-50 dark:hover:bg-green-900 transition">
-                        <Upload size={40} className="text-green-600 dark:text-green-400" />
-                        <p className="mt-4 text-green-700 dark:text-green-300">
-                            Click to Upload Leaf Image
-                        </p>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            className="hidden"
-                            onChange={handleImageUpload}
-                        />
-                    </label>
-                ) : (
-                    <div className="text-center">
-
-
-                        <div className="text-center">
-                            <img
-                                src={image}
-                                alt="Preview"
-                                className="mx-auto rounded-xl shadow-lg w-80 h-auto"
-                            />
-
-                            <div className="flex justify-center gap-4 mt-6">
-                                <button
-                                    onClick={handleAnalyze}
-                                    className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-                                >
-                                    Analyze Leaf
-                                </button>
-
-                                <button
-                                    onClick={() => {
-                                        setImage(null);
-                                        setFile(null);
-                                        setResult(null);
-                                    }}
-                                    className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
-                                >
-                                    Choose Another
-                                </button>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                )}
-            </motion.div>
-
-            {/* Loading Spinner */}
-            {loading && (
+                {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="flex justify-center mt-10"
+                    initial={{ opacity: 0, y: -40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16"
                 >
-                    <Loader2 className="animate-spin text-green-600" size={40} />
+                    <h1 className="text-5xl font-bold text-green-700 dark:text-green-400 flex justify-center items-center gap-4">
+                        <Leaf size={40} /> Scan Your Crop
+                    </h1>
+                    <p className="mt-4 text-gray-600 dark:text-gray-300 text-lg">
+                        Upload a leaf image and let AgroVision AI detect diseases instantly.
+                    </p>
                 </motion.div>
-            )}
 
-            {/* Result Section */}
-            {result && (
+                {/* Upload Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="max-w-4xl mx-auto mt-16 bg-[#DBFCE7] dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
+                    className="max-w-3xl mx-auto bg-[#DBFCE7] dark:bg-[#13281b] p-10 rounded-2xl shadow-xl border border-green-200 dark:border-green-800"
                 >
-                    <h2 className="text-3xl text-green-700 dark:text-green-400 mb-8 text-center font-bold">
-                        Scan
-                    </h2>
-
-                    <div className="grid md:grid-cols-2 gap-10">
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-4">
-                                <Leaf className="text-green-600" />
-                                <p className="text-black dark:text-white "><strong>Diseasem:</strong> {result.disease}</p>
+                    {!image ? (
+                        <label className="flex flex-col items-center justify-center border-2 border-dashed border-green-400 rounded-xl p-10 cursor-pointer hover:bg-green-50 dark:hover:bg-green-900 transition">
+                            <Upload size={40} className="text-green-600 dark:text-green-400" />
+                            <p className="mt-4 text-green-700 dark:text-green-300">
+                                Click to Upload Leaf Image
+                            </p>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={handleImageUpload}
+                            />
+                        </label>
+                    ) : (
+                        <div className="text-center">
+                            <motion.img
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                src={image}
+                                alt="Selected Crop"
+                                className="w-full max-h-80 object-cover rounded-xl shadow-lg mb-6"
+                            />
+                            <div className="flex gap-4 justify-center">
+                                <button
+                                    onClick={() => setImage(null)}
+                                    className="px-6 py-2 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition"
+                                >
+                                    Remove
+                                </button>
+                                <button
+                                    onClick={handleAnalyze}
+                                    disabled={loading}
+                                    className="px-8 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 flex items-center gap-2 transition"
+                                >
+                                    {loading ? <Loader2 className="animate-spin" /> : "Analyze Now"}
+                                </button>
                             </div>
+                        </div>
+                    )}
+                </motion.div>
 
-                            {/* <div className="flex items-center gap-4">
-                                <BarChart3 className="text-green-600" />
-                                <p className="text-black dark:text-white "><strong>Confidence:</strong> {result.confidence}</p>
-                            </div> */}
-
-                            {/* <div className="flex items-center gap-4">
-                                <Pill className="text-green-600" />
-                                <p className="text-black dark:text-white "><strong>Medicine:</strong> {result.medicine}</p>
-                            </div> */}
-
-
-                            <div className="flex items-center gap-4">
-                                <Store className="text-green-600" />
-                                <p className="text-black dark:text-white "><strong>Nearby Shop:</strong> {result.shop}</p>
-                            </div>
-
-                            <div className="flex items-center gap-4">
-                                <Pill className="text-green-600" />
-
-                                <div>
-                                    <p className="text-black dark:text-white">
-                                        <strong>Medicine:</strong>{" "}
-                                        {solution ? extractMedicine(solution) : "Loading..."}
-                                    </p>
-
-                                    {solution && (
-                                        <button
-                                            onClick={() =>
-                                                window.open(getBuyLink(extractMedicine(solution)), "_blank")
-                                            }
-                                            className="mt-2 px-4 py-1 bg-green-600 text-white rounded-md text-sm hover:scale-105 transition"
-                                        >
-                                            Buy Online
-                                        </button>
-                                    )}
+                {/* Results Section */}
+                {result && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8"
+                    >
+                        <div className="bg-white dark:bg-[#13281b] p-8 rounded-2xl shadow-lg border border-green-200 dark:border-green-800">
+                            <h2 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-6 flex items-center gap-2">
+                                <BarChart3 size={24} /> Analysis Result
+                            </h2>
+                            <div className="space-y-4">
+                                <p className="text-lg dark:text-gray-200">
+                                    <span className="font-bold text-green-600">Disease:</span> {result.disease}
+                                </p>
+                                <p className="text-lg dark:text-gray-200">
+                                    <span className="font-bold text-green-600">Confidence:</span> {result.confidence}
+                                </p>
+                                <div className="flex gap-4 mt-8">
+                                    <button
+                                        onClick={generatePDF}
+                                        className="flex-1 py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition"
+                                    >
+                                        Download Report
+                                    </button>
+                                    <button
+                                        onClick={handleWatchVideo}
+                                        className="flex-1 py-3 border-2 border-green-600 text-green-600 rounded-lg font-bold hover:bg-green-600 hover:text-white transition"
+                                    >
+                                        Watch Video
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-green-50 dark:bg-[#284131b9] p-6 rounded-xl">
-                            <p className="font-semibold text-green-700 dark:text-green-300">
-                                Recommended Action:
-                            </p>
-                            <p className="mt-3 text-gray-700 dark:text-gray-100">
-                                Apply treatment immediately and monitor crop condition for the
-                                next 5-7 days. Avoid overwatering and ensure proper sunlight.
-                            </p>
-                            <div className="flex justify-between gap-2">
-
-
-
-                                <button onClick={handleDownloadPDF} className=" cursor-pointer mt-6 px-6 py-2 bg-green-700 text-white rounded-lg hover:scale-105 transition">
-                                    Download Pdf 
-                                </button>
-                                <button
-                                    onClick={handleWatchVideo}
-                                    className="mt-6 px-6 py-2 bg-red-600 cursor-pointer text-white rounded-lg hover:scale-105 transition"
-                                >
-                                    Watch Video
-                                </button>
-                            </div>
+                        {/* Gemini Solution Section */}
+                        <div className="bg-white dark:bg-[#13281b] p-8 rounded-2xl shadow-lg border border-green-200 dark:border-green-800">
+                            <h2 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-6 flex items-center gap-2">
+                                <Pill size={24} /> AI Suggestions
+                            </h2>
+                            {loadingGemini ? (
+                                <div className="flex flex-col items-center justify-center py-10">
+                                    <Loader2 size={32} className="animate-spin text-green-500 mb-4" />
+                                    <p className="text-gray-500 dark:text-gray-400">Consulting AgroVision AI...</p>
+                                </div>
+                            ) : (
+                                <div className="prose dark:prose-invert max-w-none">
+                                    <div className="whitespace-pre-wrap text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        {solution}
+                                    </div>
+                                    {solution && (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            className="mt-8 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800 flex justify-between items-center"
+                                        >
+                                            <div>
+                                                <p className="text-xs text-green-600 font-bold uppercase tracking-wider">Recommended Medicine</p>
+                                                <p className="text-lg font-bold text-green-800 dark:text-green-200">{extractMedicine(solution)}</p>
+                                            </div>
+                                            <a
+                                                href={getBuyLink(extractMedicine(solution))}
+                                                target="_blank"
+                                                className="px-6 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition flex items-center gap-2"
+                                            >
+                                                <Store size={18} /> Buy Now
+                                            </a>
+                                        </motion.div>
+                                    )}
+                                </div>
+                            )}
                         </div>
-
-
-                    </div>
-
-                </motion.div>
-
-            )}
-
-
-            {
-                result &&
-                <div className="mx-auto w-fit">
-
-                    <div className="mt-6 inline-block relative rounded-xl p-[2px] overflow-hidden">
-
-                        {/* Rotating gradient border */}
-                        <div className="absolute inset-0   rounded-xl   "></div>
-
-                       
-                         
-                    </div>
-
-                    {loadingGemini && (
-                        <div className="flex justify-center mt-4">
-                            <Loader2 className="animate-spin text-yellow-400" size={30} />
-                            <p className="ml-2 text-yellow-400">Getting AI suggestions...</p>
-                        </div>
-                    )}
-
-                    {solution && (
-                        <div className="mt-6 p-4 bg-green-900/30 rounded-xl ">
-                            <h3 className="text-green-700 font-bold mb-2   ">AI Recommendation</h3>
-                            <pre className="whitespace-pre-wrap  text-gray-600 dark:text-gray-300 text-lg">
-                                {solution}
-                            </pre>
-                        </div>
-                    )}
-                </div>
-            }
+                    </motion.div>
+                )}
+            </div>
         </div>
     );
 }

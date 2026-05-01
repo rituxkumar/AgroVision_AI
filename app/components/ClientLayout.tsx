@@ -19,7 +19,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   }, []);
   
   // Define paths where navbar and footer should be hidden
-  const hideOnPaths = ["/dashboard", "/login", "/register"];
+  const hideOnPaths = ["/dashboard", "/login", "/register", "/scan", "/history", "/about"];
   const shouldHide = hideOnPaths.some(path => pathname.startsWith(path));
 
   return (

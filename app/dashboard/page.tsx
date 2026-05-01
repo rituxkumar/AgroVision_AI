@@ -53,6 +53,16 @@ export default function Dashboard() {
         animate="visible"
         className="max-w-6xl mx-auto"
       >
+        {/* Top Navigation Bar */}
+        <motion.div variants={itemVariants} className="flex justify-between items-center mb-10">
+          <Link href="/" className="group">
+            <img src="/main_logo.png" alt="Logo" className="h-10 sm:h-12 object-contain transition-transform group-hover:scale-105" />
+          </Link>
+          <div className="flex items-center gap-4">
+            <UserMenu />
+          </div>
+        </motion.div>
+
         {/* Header Section */}
         <motion.div variants={itemVariants} className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
           <div>
@@ -62,12 +72,6 @@ export default function Dashboard() {
             <p className="text-gray-600 dark:text-gray-400 mt-2 text-lg select-none cursor-default">
               Monitor your crops and detect potential threats in real-time.
             </p>
-          </div>
-          <div className="flex items-center gap-4">
-            {/* Professional Profile Avatar */}
-            <div className="pl-4">
-              <UserMenu />
-            </div>
           </div>
         </motion.div>
 
