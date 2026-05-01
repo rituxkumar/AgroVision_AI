@@ -3,11 +3,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import jsPDF from "jspdf";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const ai = new GoogleGenAI({
-    apiKey: "AIzaSyDkpJZnCkaE1PR_beRM3WSXdx8eGQs5T38",
-});
+const ai = new GoogleGenerativeAI("AIzaSyDkpJZnCkaE1PR_beRM3WSXdx8eGQs5T38");
 
 import {
     Upload,
