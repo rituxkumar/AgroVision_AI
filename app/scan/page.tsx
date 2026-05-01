@@ -24,13 +24,13 @@ export default function ScanPage() {
     const [image, setImage] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any>(null);
-    const [file, setFile] = useState(null);
-    const [solution, setSolution] = useState(null);
+    const [file, setFile] = useState<File | null>(null);
+    const [solution, setSolution] = useState<string | null>(null);
     const [loadingGemini, setLoadingGemini] = useState(false);
 
 
-    const handleImageUpload = (e) => {
-        const selectedFile = e.target.files[0];
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0];
 
         if (selectedFile) {
             setFile(selectedFile);   // ✅ IMPORTANT
@@ -91,7 +91,7 @@ export default function ScanPage() {
     };
 
 
-    const getGeminiSolution = async (disease) => {
+    const getGeminiSolution = async (disease: string) => {
         try {
             const response = await ai.models.generateContent({
                 model: "gemini-3-flash-preview", // ✅ latest working
@@ -118,7 +118,7 @@ Use: ...
 `
             });
 
-            return response.text;
+            return response.text || "No suggestions available";
         } catch (err) {
             console.error("Gemini Error:", err);
             return "Failed to get AI suggestions";
@@ -194,11 +194,11 @@ Use: ...
 
         setLoading(false);
     };
-    const extractMedicine = (text) => {
+    const extractMedicine = (text: string) => {
         const match = text.match(/Name:\s*(.*)/i);
         return match ? match[1] : "Recommended Medicine";
     };
-    const getBuyLink = (medicine) => {
+    const getBuyLink = (medicine: string) => {
         const query = encodeURIComponent(medicine);
         return `https://www.flipkart.com/search?q=${query}`;
     };
