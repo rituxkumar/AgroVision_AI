@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
 
   // Paths that require authentication
-  const protectedPaths = ["/dashboard", "/scan", "/history"];
+  const protectedPaths = ["/dashboard", "/scann", "/history"];
   const isProtected = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path)
   );

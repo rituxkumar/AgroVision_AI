@@ -152,17 +152,23 @@ export default function ScanPage() {
             const formData = new FormData();
             formData.append("file", file);
 
-            const res = await fetch("http://127.0.0.1:8000/predict", {
+            const res = await fetch("https://agrovision-backend-w994.onrender.com/predict", {
                 method: "POST",
                 body: formData,
             });
 
             const data = await res.json();
-            
+
 
             console.log("API 👉", data);
 
-            const cleanName = data.class
+            if (!data.disease) {
+                alert("Prediction failed");
+                setLoading(false);
+                return;
+            }
+
+            const cleanName = data.disease
                 .replace("___", " - ")
                 .replace(/_/g, " ");
 
@@ -243,13 +249,16 @@ export default function ScanPage() {
                         </label>
                     ) : (
                         <div className="text-center">
-                            <motion.img
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                src={image}
-                                alt="Selected Crop"
-                                className="w-full max-h-80 object-cover rounded-xl shadow-lg mb-6"
-                            />
+                            <div className="flex   items-center justify-center">
+                                <motion.img
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    src={image}
+                                    alt="Selected Crop"
+                                    className="w-[70%] max-h-70  rounded-xl shadow-lg mb-6"
+                                />
+                            </div>
+
                             <div className="flex gap-4 justify-center">
                                 <button
                                     onClick={() => setImage(null)}
