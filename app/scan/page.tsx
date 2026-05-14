@@ -158,6 +158,7 @@ export default function ScanPage() {
             });
 
             const data = await res.json();
+            
 
             console.log("API 👉", data);
 
